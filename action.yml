@@ -1,0 +1,38 @@
+name: Manual Trigger
+description: 'Allows you to setup a manual trigger for a workflow so subsequent jobs can be skipped if the trigger is not run or if the jobs need to be run at a later time.'
+author: 'IncludeHealth'
+
+inputs:
+  RUN_NAME:
+    description: "Run name that you can use for your workflow if triggers"
+    required: false
+    default: "run-workflow"
+outputs:
+  CONTINUE_JOBS:
+    description: "Continue jobs with given output name"
+    value: ${{ steps.set_output.outputs.CONTINUE_JOBS }}
+    
+runs:
+  using: composite
+  steps:
+    - name: Download continue file if exists
+      uses: actions/download-artifact@v3
+      continue-on-error: true
+      with:
+        name: ${{ inputs.RUN_NAME }}
+    - name: Check if continue file exists
+      id: set_output
+      run: |
+        if [ -f "continue.txt" ]; then
+          echo "CONTINUE_JOBS=true" >> $GITHUB_OUTPUT
+        else
+          echo "CONTINUE_JOBS=false" >> $GITHUB_OUTPUT
+          echo "Rerun manual trigger job to continue :recycle:" >> $GITHUB_STEP_SUMMARY
+          touch continue.txt
+        fi
+      shell: bash
+    - name: Upload continue file
+      uses: actions/upload-artifact@v3
+      with:
+        name: ${{ inputs.RUN_NAME }}
+        path: continue.txt
