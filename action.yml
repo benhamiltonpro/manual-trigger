@@ -1,5 +1,5 @@
 name: Manual Trigger
-description: 'Allows you to setup a manual trigger for a workflow so subsequent jobs can be skipped if the trigger is not run or if the jobs need to be run at a later time.'
+description: 'Allows you to set up a manual trigger for a workflow so subsequent jobs can run later.'
 author: 'IncludeHealth'
 
 inputs:
