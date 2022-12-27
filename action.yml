@@ -1,6 +1,6 @@
 name: Manual Trigger
 description: 'Allows you to set up a manual trigger for a workflow so subsequent jobs can run later.'
-author: 'IncludeHealth'
+author: 'Ben Hamilton'
 branding:
   icon: 'play-circle'
   color: 'blue'

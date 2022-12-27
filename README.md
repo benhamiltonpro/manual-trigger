@@ -10,7 +10,7 @@ For each manual step you must rerun the step to execute the manual trigger. The 
 
 ```yaml
 manual-step-name:
-  uses: IncludeHealth/manual-trigger@v1
+  uses: benhamiltonpro/manual-trigger@v1
     with:
       RUN_NAME: "manual-step"
 step-awaiting-manual-trigger:
@@ -24,7 +24,7 @@ step-awaiting-manual-trigger:
 ```yaml
 ...
 manual-trigger-build:
-  uses: IncludeHealth/manual-trigger@v1
+  uses: benhamiltonpro/manual-trigger@v1
     with:
       RUN_NAME: "build"
 build:
@@ -46,7 +46,7 @@ build:
 ```yaml
 ...
 manual-trigger-build:
-  uses: IncludeHealth/manual-trigger@v1
+  uses: benhamiltonpro/manual-trigger@v1
     with:
       RUN_NAME: "build"
 build:
@@ -58,7 +58,7 @@ build:
       run: echo "It runs plan"
 
 manual-trigger-deploy:
-  uses: IncludeHealth/manual-trigger@v1
+  uses: benhamiltonpro/manual-trigger@v1
     with:
       RUN_NAME: "deploy"
 deploy:
@@ -82,7 +82,7 @@ deploy:
 ```yaml
 ...
 manual-trigger-build:
-  uses: IncludeHealth/manual-trigger@v1
+  uses: benhamiltonpro/manual-trigger@v1
     with:
       RUN_NAME: "build"
 build:
@@ -95,7 +95,7 @@ build:
 
 manual-trigger-deploy:
   needs: build
-  uses: IncludeHealth/manual-trigger@v1
+  uses: benhamiltonpro/manual-trigger@v1
     with:
       RUN_NAME: "deploy"
 deploy:
