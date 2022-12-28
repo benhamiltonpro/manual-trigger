@@ -28,9 +28,11 @@ runs:
       run: |
         if [ -f "continue.txt" ]; then
           echo "CONTINUE_JOBS=true" >> $GITHUB_OUTPUT
+          echo "Continue jobs :rocket:"
         else
           echo "CONTINUE_JOBS=false" >> $GITHUB_OUTPUT
           echo "Rerun manual trigger job to continue :recycle:" >> $GITHUB_STEP_SUMMARY
+          echo "Pausing before jobs :hourglass:"
           touch continue.txt
         fi
       shell: bash
