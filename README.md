@@ -10,9 +10,15 @@ For each manual step you must rerun the step to execute the manual trigger. The 
 
 ```yaml
 manual-step-name:
-  uses: benhamiltonpro/manual-trigger@v1
-    with:
-      RUN_NAME: "manual-step"
+  runs-on: ubuntu-latest
+  outputs:
+      CONTINUE_JOBS: ${{ steps.manual-trigger.outputs.CONTINUE_JOBS }}
+  steps:
+    - name: manual-trigger
+      id: manual-trigger
+      uses: benhamiltonpro/manual-trigger@v1
+      with:
+        RUN_NAME: "manual-step"
 step-awaiting-manual-trigger:
   needs: manual-step-name
   if: ${{ needs.manual-step-name.outputs.CONTINUE_JOBS == 'true' }}
@@ -23,10 +29,16 @@ step-awaiting-manual-trigger:
 
 ```yaml
 ...
-manual-trigger-build:
-  uses: benhamiltonpro/manual-trigger@v1
-    with:
-      RUN_NAME: "build"
+manual-step-name:
+  runs-on: ubuntu-latest
+  outputs:
+      CONTINUE_JOBS: ${{ steps.manual-trigger.outputs.CONTINUE_JOBS }}
+  steps:
+    - name: manual-trigger
+      id: manual-trigger
+      uses: benhamiltonpro/manual-trigger@v1
+      with:
+        RUN_NAME: "build"
 build:
   needs: manual-trigger-build
   if: ${{ needs.manual-trigger-build.outputs.CONTINUE_JOBS == 'true' }}
@@ -46,9 +58,15 @@ build:
 ```yaml
 ...
 manual-trigger-build:
-  uses: benhamiltonpro/manual-trigger@v1
-    with:
-      RUN_NAME: "build"
+  runs-on: ubuntu-latest
+  outputs:
+      CONTINUE_JOBS: ${{ steps.manual-trigger.outputs.CONTINUE_JOBS }}
+  steps:
+    - name: manual-trigger
+      id: manual-trigger
+      uses: benhamiltonpro/manual-trigger@v1
+      with:
+        RUN_NAME: "build"
 build:
   needs: manual-trigger-build
   if: ${{ needs.manual-trigger-build.outputs.CONTINUE_JOBS == 'true' }}
@@ -58,8 +76,14 @@ build:
       run: echo "It runs plan"
 
 manual-trigger-deploy:
-  uses: benhamiltonpro/manual-trigger@v1
-    with:
+  runs-on: ubuntu-latest
+  outputs:
+      CONTINUE_JOBS: ${{ steps.manual-trigger.outputs.CONTINUE_JOBS }}
+  steps:
+    - name: manual-trigger
+      id: manual-trigger
+      uses: benhamiltonpro/manual-trigger@v1
+      with:
       RUN_NAME: "deploy"
 deploy:
   needs: manual-trigger-deploy
@@ -82,9 +106,15 @@ deploy:
 ```yaml
 ...
 manual-trigger-build:
-  uses: benhamiltonpro/manual-trigger@v1
-    with:
-      RUN_NAME: "build"
+  runs-on: ubuntu-latest
+  outputs:
+      CONTINUE_JOBS: ${{ steps.manual-trigger.outputs.CONTINUE_JOBS }}
+  steps:
+    - name: manual-trigger
+      id: manual-trigger
+      uses: benhamiltonpro/manual-trigger@v1
+      with:
+        RUN_NAME: "build"
 build:
   needs: manual-trigger-build
   if: ${{ needs.manual-trigger-build.outputs.CONTINUE_JOBS == 'true' }}
@@ -95,9 +125,15 @@ build:
 
 manual-trigger-deploy:
   needs: build
-  uses: benhamiltonpro/manual-trigger@v1
-    with:
-      RUN_NAME: "deploy"
+  runs-on: ubuntu-latest
+  outputs:
+      CONTINUE_JOBS: ${{ steps.manual-trigger.outputs.CONTINUE_JOBS }}
+  steps:
+    - name: manual-trigger
+      id: manual-trigger
+      uses: benhamiltonpro/manual-trigger@v1
+      with:
+        RUN_NAME: "deploy"
 deploy:
   needs: manual-trigger-deploy
   if: ${{ needs.manual-trigger-deploy.outputs.CONTINUE_JOBS == 'true' }}
