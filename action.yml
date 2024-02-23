@@ -19,7 +19,7 @@ runs:
   using: composite
   steps:
     - name: Download continue file if exists
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       continue-on-error: true
       with:
         name: ${{ inputs.RUN_NAME }}
