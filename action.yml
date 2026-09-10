@@ -19,7 +19,7 @@ runs:
   using: composite
   steps:
     - name: Download continue file if exists
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v7
       continue-on-error: true
       with:
         name: ${{ inputs.RUN_NAME }}
@@ -37,7 +37,7 @@ runs:
         fi
       shell: bash
     - name: Upload continue file
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v6
       with:
         name: ${{ inputs.RUN_NAME }}
         path: continue.txt
